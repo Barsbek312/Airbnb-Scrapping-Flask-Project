@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align:center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        form > div {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hotels from airbnb</h1>
+
+    <form action="/" method="post">
+        <div>   
+            <label for="country">Страна: </label>
+            <select name="name_country" id="country">
+                <option value="-1">All</option>
+                {% for i in range(lenCountry) %}
+                    {% if i+1 == selectedCountry %}
+                        <option value="{{i}}" selected>{{countryUn[i][0]}}</option>
+                    {% else %}
+                        <option value="{{i}}">{{countryUn[i][0]}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>    
+        </div>
+        <div>   
+            <label for="place">Место: </label>
+            <select name="name_place" id="place">
+                <option value="-1">All</option>
+                {% for i in range(lenPlace) %}
+                    {% if i+1 == selectedPlace %}
+                        <option value="{{i}}" selected>{{placeUn[i][0]}}</option>
+                    {% else %}
+                        <option value="{{i}}">{{placeUn[i][0]}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>    
+        </div>
+        <div>   
+            <label for="raiting">Рейтинг(более выбранного значения): </label>
+            <select name="name_raiting" id="raiting">
+                <option value="-1">All</option>
+                {% for i in range(1, 6) %}
+                    {% if selectedRaiting == i %}
+                        <option value="{{i}}" selected>{{i}}</option>
+                    {% else %}
+                        <option value="{{i}}">{{i}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>    
+        </div>
+        <div>   
+            <label for="quantityOfBed">Количество диванов:</label>
+            <select name="name_quantityOfBed" id="quantityOfBed">
+                <option value="-1">All</option>
+                {% for i in range(1, 9) %}
+                    {% if selectedQuantityOfBed == i %}
+                        <option value="{{i}}" selected>{{i}}</option>
+                    {% else %}
+                        <option value="{{i}}">{{i}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>    
+        </div>
+        <div>   
+            <label for="dollar">Долларов и более</label>
+            <input type="number" name='name_dollar' id='dollar' value={{selectedAmountDollar}}>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    {{ hotels | safe }}
+</body>
+</html>
